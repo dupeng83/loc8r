@@ -33,9 +33,28 @@ var ratingStars = function () {
   };
 };
 
-var locationListCtrl = function ($scope, loc8rData) {
+var geolocation = function () {
+  var getPosition = function (cbSuccess, cbError, cbNoGeo) {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(cbSuccess, cbError);
+    }
+    else {
+      cbNoGeo();
+    }
+  };
+  return {
+    getPosition : getPosition
+  };
+};
+
+var locationListCtrl = function ($scope, loc8rData, geolocation) {
+  $scope.message = "Checking your location";
+
+  $scope.getData = function (position) {
+    var lat = position.coords.latitude,
+        lng = position.coords.longitude;
     $scope.message = "Searching for nearby places";
-    loc8rData
+    loc8rData.locationByCoords(lat, lng)
       .success(function(data) {
         $scope.message = data.length > 0 ? "" : "No locations found nearby";
         $scope.data = { locations: data };
@@ -43,16 +62,34 @@ var locationListCtrl = function ($scope, loc8rData) {
       .error(function (e) {
         $scope.message = "Sorry, something's gone wrong, please try again later";
       });
+  };
+
+  $scope.showError = function (error) {
+    $scope.$apply(function() {
+      $scope.message = error.message;
+    });
+  };
+
+  $scope.noGeo = function () {
+    $scope.$apply(function() {
+      $scope.message = "Geolocation is not supported by this browser.";
+    });
+  };
+
+  geolocation.getPosition($scope.getData,$scope.showError,$scope.noGeo);
 }
 
 var loc8rData = function ($http) {
-  return $http.get('/api/locations?lng=126.62&lat=45.75&maxDistance=20');
-  // var locationByCoords = function (lat, lng) {
-  //   return $http.get('/api/locations?lng=' + lng + '&lat=' + lat + '&maxDistance=20');
-  // };
-  // return {
-  //   locationByCoords : locationByCoords
-  // };
+  var locationByCoords = function (lat, lng) {
+    console.log("zuobiao: ============================")
+    console.log(lat)
+    console.log(lng)
+    // return $http.get('/api/locations?lng=126.62&lat=45.75&maxDistance=20');
+    return $http.get('/api/locations?lng=' + lng + '&lat=' + lat + '&maxDistance=20');
+  };
+  return {
+    locationByCoords : locationByCoords
+  };
 
   // return [{
   //     name: 'Burger Queen',
@@ -105,4 +142,4 @@ angular
   .filter('formatDistance', formatDistance)
   .directive('ratingStars', ratingStars)
   .service('loc8rData', loc8rData)
-  // .service('geolocation', geolocation);
+  .service('geolocation', geolocation);
