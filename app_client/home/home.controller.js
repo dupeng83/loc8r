@@ -1,8 +1,11 @@
-angular
+(function() {
+
+  angular
     .module('loc8rApp')
     .controller('homeCtrl', homeCtrl);
 
-function homeCtrl ($scope, loc8rData, geolocation) {
+  homeCtrl.$inject = ['$scope', 'loc8rData', 'geolocation'];
+  function homeCtrl ($scope, loc8rData, geolocation) {
     var vm = this;
     vm.pageHeader = {
       title: 'Loc8r',
@@ -41,5 +44,6 @@ function homeCtrl ($scope, loc8rData, geolocation) {
     };
 
     geolocation.getPosition(vm.getData,vm.showError,vm.noGeo);
-
 }
+
+})();

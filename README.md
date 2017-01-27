@@ -1,3 +1,3 @@
-getting MEAN 上的例子
+[Getting MEAN](https://www.manning.com/books/getting-mean-with-mongo-express-angular-and-node) 上的例子
 
-下载之后运行npm install即可
+clone之后运行npm install即可

@@ -1,4 +1,6 @@
-angular.module('loc8rApp', ['ngRoute']);
+(function () {
+
+  angular.module('loc8rApp', ['ngRoute']);
 
   function config ($routeProvider) {
     $routeProvider
@@ -13,3 +15,5 @@ angular.module('loc8rApp', ['ngRoute']);
   angular
     .module('loc8rApp')
     .config(['$routeProvider', config]);
+
+})();
