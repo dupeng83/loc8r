@@ -18,14 +18,14 @@
       return $http.get('/api/locations/' + locationid);
     };
 
-    // var addReviewById = function (locationid, data) {
-    //   return $http.post('/api/locations/' + locationid + '/reviews', data);
-    // };
+    var addReviewById = function (locationid, data) {
+      return $http.post('/api/locations/' + locationid + '/reviews', data);
+    };
 
     return {
       locationByCoords : locationByCoords,
       locationById : locationById,
-      // addReviewById : addReviewById
+      addReviewById : addReviewById
     };
   }
 
