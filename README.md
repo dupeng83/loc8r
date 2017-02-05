@@ -6,6 +6,6 @@
 
 `npm install`
 
-另外要求要有MongoDB服务. 数据库上面还要有一些假数据. 所以可以直接看[heroku上部署的版本](https://dashboard.heroku.com/apps/polar-everglades-51295)
+另外要求要有MongoDB服务. 数据库上面还要有一些假数据. 所以可以直接看[heroku上部署的版本](https://polar-everglades-51295.herokuapp.com/)
 
-网站的功能就是显示自己所在位置附近的一些餐馆饭店, 然后可以查看这个餐馆饭店的详细信息, 还调用google map api显示了地图信息.
+网站的功能就是显示自己所在位置附近的一些餐馆饭店, 然后可以查看这个餐馆饭店的详细信息, 还可以发评论. 另外还调用google map api显示了地图信息.
